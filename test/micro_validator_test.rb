@@ -40,5 +40,16 @@ module MicroValidator
       MyKlass.validate(:successful)
       @klass.valid?
     end
+
+    def test_should_return_all_errors
+      MyKlass.validate(:testing)
+      MyKlass.validate(:another)
+      MyKlass.validate(:successful)
+      MyKlass.validate(:different_field)
+      @klass.valid?
+      assert_equal ({ testing: ["Something failed...", "Another failure!"],
+                      different_field: ["It's different this time."]} ),
+                   @klass.errors.all
+    end
   end
 end
