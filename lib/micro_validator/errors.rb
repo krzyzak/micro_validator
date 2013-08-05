@@ -17,6 +17,10 @@ module MicroValidator
       @errors
     end
 
+    def pick_one(field)
+      @errors[field]
+    end
+
   private
     def errors
       @errors ||= {}

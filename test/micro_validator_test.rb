@@ -14,8 +14,8 @@ private
     errors.add(:testing, "Another failure!")
   end
 
-  def different_field
-    errors.add(:different_field, "It's different this time.")
+  def different
+    errors.add(:different, "It's different this time.")
   end
 
   def successful
@@ -43,12 +43,20 @@ module MicroValidator
     end
 
     def test_should_return_all_errors
-      MyKlass.validate :testing, :another, :successful, :different_field
+      MyKlass.validate :testing, :another, :successful, :different
       @klass.valid?
 
       assert_equal ({ testing: ["Something failed...", "Another failure!"],
-                      different_field: ["It's different this time."]} ),
+                      different: ["It's different this time."]} ),
                    @klass.errors.all
+    end
+
+    def test_picking_one_error
+      MyKlass.validate :testing, :different
+      @klass.valid?
+
+      assert_equal ["It's different this time."],
+                   @klass.errors.pick_one(:different)
     end
   end
 end
