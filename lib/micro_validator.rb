@@ -7,8 +7,8 @@ module MicroValidator
       @validation_methods ||= []
     end
 
-    def validate(method_name)
-      validation_methods << method_name
+    def validate(*method_names)
+      method_names.each { |method_name| validation_methods << method_name }
     end
   end
 
