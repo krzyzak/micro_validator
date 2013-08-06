@@ -13,7 +13,15 @@ module MicroValidator
       errors.empty?
     end
 
-    private
+    def all
+      @errors
+    end
+
+    def field(name)
+      @errors[name]
+    end
+
+  private
     def errors
       @errors ||= {}
     end
