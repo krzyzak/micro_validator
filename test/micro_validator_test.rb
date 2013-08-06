@@ -56,7 +56,7 @@ module MicroValidator
       @klass.valid?
 
       assert_equal ["It's different this time."],
-                   @klass.errors.pick_one(:different)
+                   @klass.errors.field(:different)
     end
   end
 end

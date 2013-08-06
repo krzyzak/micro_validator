@@ -17,8 +17,8 @@ module MicroValidator
       @errors
     end
 
-    def pick_one(field)
-      @errors[field]
+    def field(name)
+      @errors[name]
     end
 
   private
